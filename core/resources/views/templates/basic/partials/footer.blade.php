@@ -5,7 +5,7 @@
 @endphp
 
 <footer class="footer-area">
-    <div class="py-60">
+    {{-- <div class="py-60">
         <div class="container">
             <div class="row gy-4 justify-content-center">
                 <div class="col-sm-6 col-xl-6">
@@ -67,7 +67,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    {{-- Bottom footer --}}
     <div class="bottom-footer">
         <div class="container">
             <div class="bottom-footer__style py-3">
