@@ -72,7 +72,7 @@
         </div>
     </section>
 
-    @include($activeTemplate . 'sections.blog')
+    {{-- @include($activeTemplate . 'sections.blog') --}}
 
     @if ($sections->secs != null)
         @foreach (json_decode($sections->secs) as $sec)
