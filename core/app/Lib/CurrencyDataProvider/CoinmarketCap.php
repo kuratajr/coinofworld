@@ -167,12 +167,18 @@ class CoinmarketCap extends CurrencyDataProvider
 
     public function getPriceFiat($key = null)
     {
-        $url           = 'https://www.xe.com/api/protected/midmarket-converter/';
-        $headers       = [
+        $url = 'https://www.xe.com/api/protected/midmarket-converter/';
+        $headers = [
             'Authorization:Basic bG9kZXN0YXI6cHVnc25heA==',
         ];
         $response = CurlRequest::curlContent($url, $headers);
-        $data = json_decode($response->getBody(), true);
+    
+        // Check if the response is a string
+        if (is_string($response)) {
+            $data = json_decode($response, true);
+        } else {
+            $data = json_decode($response->getBody(), true);
+        }
     
         if (isset($data['rates'][$key])) {
             $rate = floatval(1 / $data['rates'][$key]);
