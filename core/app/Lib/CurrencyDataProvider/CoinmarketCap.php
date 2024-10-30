@@ -173,14 +173,9 @@ class CoinmarketCap extends CurrencyDataProvider
         ];
         $response = CurlRequest::curlContent($url, $headers);
         $data = json_decode($response->getBody(), true);
-        // Log the response
-        error_log("Response Data: " . json_encode($data));
     
         if (isset($data['rates'][$key])) {
             $rate = floatval(1 / $data['rates'][$key]);
-
-            // Log the rate
-            error_log("Rate for key $key: $rate");
             return $rate;
         } else {
             throw new Exception("Key not found in response data");
@@ -271,7 +266,7 @@ class CoinmarketCap extends CurrencyDataProvider
                 'symbol'     => @$item->symbol,
                 'sign'       => @$item->sign ?? '',
                 'ranking'    => @$item->cmc_rank ?? 0,
-                'rate'       => @$item->quote->USD->price ?? 0,
+                'rate'       => isset($item->quote->USD->price) ? $item->quote->USD->price : $this->getPriceFiat($item->symbol),
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
@@ -292,7 +287,7 @@ class CoinmarketCap extends CurrencyDataProvider
             $marketData[] = [
                 'currency_id' => $currency->id,
                 'symbol'      => @$currency->symbol,
-                'price'       => $this->getPriceFiat('VND'),
+                'price'       => @$currency->rate,
                 'pair_id'     => 0,
                 'created_at'  => $now,
                 'updated_at'  => $now,
