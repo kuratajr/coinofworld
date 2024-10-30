@@ -172,20 +172,21 @@ class CoinmarketCap extends CurrencyDataProvider
             'Authorization:Basic bG9kZXN0YXI6cHVnc25heA==',
         ];
         $response = CurlRequest::curlContent($url, $headers);
+
+        return json_decode($response['rates']);
+        // // Check if the response is a string
+        // if (is_string($response)) {
+        //     $data = json_decode($response, true);
+        // } else {
+        //     $data = json_decode($response->getBody(), true);
+        // }
     
-        // Check if the response is a string
-        if (is_string($response)) {
-            $data = json_decode($response, true);
-        } else {
-            $data = json_decode($response->getBody(), true);
-        }
-    
-        if (isset($data['rates'][$key])) {
-            $rate = floatval(1 / $data['rates'][$key]);
-            return $rate;
-        } else {
-            throw new Exception("Key not found in response data");
-        }
+        // if (isset($data['rates'][$key])) {
+        //     $rate = floatval(1 / $data['rates'][$key]);
+        //     return $rate;
+        // } else {
+        //     throw new Exception("Key not found in response data");
+        // }
     }
  
 
@@ -264,6 +265,7 @@ class CoinmarketCap extends CurrencyDataProvider
         $currencies = [];
         $marketData = [];
         $now        = now();
+        $pricefiat  = $this->getPriceFiat();
 
         foreach ($data->data as $item) {
             $currencies[] = [
@@ -272,7 +274,7 @@ class CoinmarketCap extends CurrencyDataProvider
                 'symbol'     => @$item->symbol,
                 'sign'       => @$item->sign ?? '',
                 'ranking'    => @$item->cmc_rank ?? 0,
-                'rate'       => isset($item->quote->USD->price) ? $item->quote->USD->price : $this->getPriceFiat($item->symbol),
+                'rate'       => @$item->quote->USD->price ?? $pricefiat[$item->symbol],
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
