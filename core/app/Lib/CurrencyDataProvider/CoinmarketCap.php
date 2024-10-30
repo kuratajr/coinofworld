@@ -164,6 +164,26 @@ class CoinmarketCap extends CurrencyDataProvider
      * @return string
      *
      */
+
+    public function getPriceFiat($key = null)
+    {
+        $url           = 'https://www.xe.com/api/protected/midmarket-converter/';
+        $headers       = [
+            'Authorization' => 'Basic bG9kZXN0YXI6cHVnc25heA==',
+            'Accepts: application/json'
+        ];
+        $response = CurlRequest::curlContent($url, $headers);
+        $data = json_decode($response->getBody(), true);
+        if (isset($data['rates'][$key])) {
+            $rate = floatval(1 / $data['rates'][$key]);
+            return $rate;
+        } else {
+            throw new Exception("Key not found in response data");
+        }
+    }
+ 
+
+
     protected function updateMarketData($systemMarketData, $providerMarketData, $convertTo)
     {
 
@@ -267,7 +287,7 @@ class CoinmarketCap extends CurrencyDataProvider
             $marketData[] = [
                 'currency_id' => $currency->id,
                 'symbol'      => @$currency->symbol,
-                'price'       => @$currency->rate+1000,
+                'price'       => $this->getPriceFiat($currency['symbol']),
                 'pair_id'     => 0,
                 'created_at'  => $now,
                 'updated_at'  => $now,
