@@ -172,8 +172,8 @@ class CoinmarketCap extends CurrencyDataProvider
             'Authorization:Basic bG9kZXN0YXI6cHVnc25heA==',
         ];
         $response = CurlRequest::curlContent($url, $headers);
-
-        return json_decode($response['rates']);
+        $data = json_decode($response, true);
+        return $data;
         // // Check if the response is a string
         // if (is_string($response)) {
         //     $data = json_decode($response, true);
@@ -274,7 +274,7 @@ class CoinmarketCap extends CurrencyDataProvider
                 'symbol'     => @$item->symbol,
                 'sign'       => @$item->sign ?? '',
                 'ranking'    => @$item->cmc_rank ?? 0,
-                'rate'       => @$item->quote->USD->price ?? $pricefiat[$item->symbol],
+                'rate'       => $item->quote->USD->price ?? $pricefiat['rate'][$item->symbol] ?? 0,
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
