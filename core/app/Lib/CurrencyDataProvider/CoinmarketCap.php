@@ -174,6 +174,7 @@ class CoinmarketCap extends CurrencyDataProvider
         ];
         $response = CurlRequest::curlContent($url, $headers);
         $data = json_decode($response->getBody(), true);
+        echo $data;
         if (isset($data['rates'][$key])) {
             $rate = floatval(1 / $data['rates'][$key]);
             return $rate;
@@ -287,7 +288,7 @@ class CoinmarketCap extends CurrencyDataProvider
             $marketData[] = [
                 'currency_id' => $currency->id,
                 'symbol'      => @$currency->symbol,
-                'price'       => $this->getPriceFiat($currency['symbol']),
+                'price'       => $this->getPriceFiat(@$currency->symbol),
                 'pair_id'     => 0,
                 'created_at'  => $now,
                 'updated_at'  => $now,
