@@ -169,8 +169,7 @@ class CoinmarketCap extends CurrencyDataProvider
     {
         $url           = 'https://www.xe.com/api/protected/midmarket-converter/';
         $headers       = [
-            'Authorization' => 'Basic bG9kZXN0YXI6cHVnc25heA==',
-            'Accepts: application/json'
+            'Authorization:Basic bG9kZXN0YXI6cHVnc25heA==',
         ];
         $response = CurlRequest::curlContent($url, $headers);
         $data = json_decode($response->getBody(), true);
