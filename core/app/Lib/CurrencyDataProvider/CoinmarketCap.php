@@ -274,7 +274,7 @@ class CoinmarketCap extends CurrencyDataProvider
                 'symbol'     => @$item->symbol,
                 'sign'       => @$item->sign ?? '',
                 'ranking'    => @$item->cmc_rank ?? 0,
-                'rate'       => $item->quote->USD->price ?? $pricefiat['rates'][$item->symbol] ?? 0,
+                'rate'       => $item->quote->USD->price ?? floatval(1 /$pricefiat['rates'][$item->symbol]) ?? 0,
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
