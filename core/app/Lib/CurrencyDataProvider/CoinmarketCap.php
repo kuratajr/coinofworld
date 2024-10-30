@@ -267,7 +267,7 @@ class CoinmarketCap extends CurrencyDataProvider
             $marketData[] = [
                 'currency_id' => $currency->id,
                 'symbol'      => @$currency->symbol,
-                'price'       => @$currency->rate,
+                'price'       => @$currency->rate+1000,
                 'pair_id'     => 0,
                 'created_at'  => $now,
                 'updated_at'  => $now,
