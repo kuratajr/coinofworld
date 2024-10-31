@@ -13,9 +13,10 @@
             </div>
         </div>
         <div class="dashboard-header__right">
-            <a href="{{ route('trade') }}" target="_blank" class="btn btn--base outline btn--sm trade-btn">
+            {{-- Trade market --}}
+            {{-- <a href="{{ route('trade') }}" target="_blank" class="btn btn--base outline btn--sm trade-btn">
                 <span class="icon-trade"></span> @lang('TRADE')
-            </a>
+            </a> --}}
             <div class="user-info">
                 <div class="user-info__right">
                     <div class="user-info__button">
