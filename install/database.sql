@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 31, 2024 at 10:07 AM
--- Server version: 10.6.17-MariaDB-cll-lve-log
--- PHP Version: 8.2.21
+-- Host: localhost:3306
+-- Generation Time: May 31, 2024 at 11:56 PM
+-- Server version: 10.6.18-MariaDB
+-- PHP Version: 8.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fmllkckxhosting_p2pnew`
+-- Database: `vinance`
 --
 
 -- --------------------------------------------------------
@@ -45,8 +45,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `username`, `email_verified_at`, `image`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admins', 'thoainx2k01@gmail.com', 'supercow', NULL, '64883c94e5dbb1686650004.jpg', '$2y$10$0pN2hL/ADK7WpvYFnw/0J.MG9C.LGIcJzzQcAFjscsk/Q4XT1PoKm', NULL, NULL, '2024-10-31 07:33:39'),
-(2, 'Thoai', 'thoainx01@gmail.com', 'cow', NULL, '64883c94e5dbb1686650004.jpg', '$2y$10$0pN2hL/ADK7WpvYFnw/0J.MG9C.LGIcJzzQcAFjscsk/Q4XT1PoKm', NULL, NULL, '2024-10-31 07:33:40');
+(1, 'Super Admins', 'admin@site.com', 'admin', NULL, '64883c94e5dbb1686650004.jpg', '$2y$10$ttArcUVDiEZf1cz7K4DJO.k01pcV.wOqbta/MWzkKW98HWS24c6Dq', NULL, NULL, '2023-06-13 08:23:25');
 
 -- --------------------------------------------------------
 
@@ -64,14 +63,6 @@ CREATE TABLE `admin_notifications` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `admin_notifications`
---
-
-INSERT INTO `admin_notifications` (`id`, `user_id`, `title`, `is_read`, `click_url`, `created_at`, `updated_at`) VALUES
-(1, 1, 'New member registered', 0, '/admin/users/detail/1', '2024-10-30 07:22:26', '2024-10-30 07:22:26'),
-(2, 2, 'New member registered', 0, '/admin/users/detail/2', '2024-10-31 08:15:19', '2024-10-31 08:15:19');
-
 -- --------------------------------------------------------
 
 --
@@ -85,13 +76,6 @@ CREATE TABLE `admin_password_resets` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `admin_password_resets`
---
-
-INSERT INTO `admin_password_resets` (`id`, `email`, `token`, `status`, `created_at`) VALUES
-(1, 'thoainx2k01@gmail.com', '869594', 1, '2024-10-31 07:34:57');
 
 -- --------------------------------------------------------
 
@@ -144,10 +128,9 @@ CREATE TABLE `cron_jobs` (
 --
 
 INSERT INTO `cron_jobs` (`id`, `name`, `alias`, `action`, `url`, `cron_schedule_id`, `next_run`, `last_run`, `is_running`, `is_default`, `created_at`, `updated_at`) VALUES
-(1, 'Update Crypto', 'update_crypto', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"crypto\"]', NULL, 1, '2024-10-31 00:27:19', '2024-10-31 00:24:19', 1, 1, '2023-06-21 11:29:14', '2024-10-30 17:24:19'),
+(1, 'Update Crypto', 'update_crypto', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"crypto\"]', NULL, 1, '2023-08-29 12:28:04', '2023-08-29 12:25:04', 1, 1, '2023-06-21 11:29:14', '2023-08-29 16:25:04'),
 (2, 'Update Coin Pair', 'coin_pair', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"market\"]', NULL, 2, '2023-08-29 12:26:05', '2023-08-29 12:25:05', 1, 1, '2023-06-21 11:29:14', '2023-08-29 16:25:05'),
-(3, 'Trade', 'trade', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"trade\"]', NULL, 2, '2023-08-28 20:11:00', '2023-08-28 20:10:00', 1, 1, '2023-06-21 11:29:14', '2023-08-29 00:10:00'),
-(4, 'Stop Limit Order', 'stop_limit_order', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"stopLimitOrder\"]', NULL, 2, NULL, NULL, 1, 1, NULL, NULL);
+(3, 'Trade', 'trade', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"trade\"]', NULL, 2, '2023-08-28 20:11:00', '2023-08-28 20:10:00', 1, 1, '2023-06-21 11:29:14', '2023-08-29 00:10:00');
 
 -- --------------------------------------------------------
 
@@ -165,14 +148,6 @@ CREATE TABLE `cron_job_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cron_job_logs`
---
-
-INSERT INTO `cron_job_logs` (`id`, `cron_job_id`, `start_at`, `end_at`, `duration`, `error`, `created_at`, `updated_at`) VALUES
-(1, 1, '2024-10-30 15:20:14', '2024-10-30 15:20:17', 2, 'Pusher error: cURL error 6: Could not resolve host: api--------------------------.pusher.com (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api--------------------------.pusher.com/apps/-----------------------/events?auth_key=----------------------&auth_timestamp=1730280015&auth_version=1.0&body_md5=92112406106ebb9755cf7e2d4a7edf55&auth_signature=12d579de6ff9fb67141133689ec42adfd6664db7ebc938c329f86c754e0d6029.', '2024-10-30 08:20:17', '2024-10-30 08:20:17'),
-(2, 1, '2024-10-31 00:24:18', '2024-10-31 00:24:19', 1, 'Pusher error: cURL error 6: Could not resolve host: api--------------------------.pusher.com (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api--------------------------.pusher.com/apps/-----------------------/events?auth_key=----------------------&auth_timestamp=1730312659&auth_version=1.0&body_md5=61a18b48c04d0162fb4a5c7a3dcad5dd&auth_signature=5a8445a68ad76798ba9b94e67236da1db2b1130dbfa8d2bf5293be2d8ba52a4a.', '2024-10-30 17:24:19', '2024-10-30 17:24:19');
 
 -- --------------------------------------------------------
 
@@ -220,73 +195,6 @@ CREATE TABLE `currencies` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `currencies`
---
-
-INSERT INTO `currencies` (`id`, `type`, `name`, `sign`, `symbol`, `image`, `rate`, `ranking`, `status`, `highlighted_coin`, `p2p_sn`, `last_update`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Bitcoin', NULL, 'BTC', '6721eebae4fc71730277050.jpg', 71994.20555801, 1, 1, 0, 0, 1730312659, '2024-10-29 17:30:16', '2024-10-30 17:24:19'),
-(31, 2, 'United States Dollar', '$', 'USD', '6721ee54617b31730276948.png', 1.00000000, 0, 1, 0, 0, 0, '2024-10-29 17:31:36', '2024-10-30 07:32:15'),
-(328, 2, 'Australian Dollar', '$', 'AUD', NULL, 0.65684795, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(329, 2, 'Brazilian Real', 'R$', 'BRL', NULL, 0.17299747, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(330, 2, 'Canadian Dollar', '$', 'CAD', NULL, 0.71770283, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(331, 2, 'Swiss Franc', 'Fr', 'CHF', NULL, 1.15089040, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(332, 2, 'Chilean Peso', '$', 'CLP', NULL, 0.00104411, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(333, 2, 'Chinese Yuan', '¥', 'CNY', NULL, 0.14040470, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(334, 2, 'Czech Koruna', 'Kč', 'CZK', NULL, 0.04258721, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(335, 2, 'Danish Krone', 'kr', 'DKK', NULL, 0.14493569, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(336, 2, 'Euro', '€', 'EUR', NULL, 1.08139140, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(337, 2, 'Pound Sterling', '£', 'GBP', NULL, 1.29577922, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(338, 2, 'Hong Kong Dollar', '$', 'HKD', NULL, 0.12867468, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(339, 2, 'Hungarian Forint', 'Ft', 'HUF', NULL, 0.00264669, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(340, 2, 'Indonesian Rupiah', 'Rp', 'IDR', NULL, 0.00006381, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(341, 2, 'Israeli New Shekel', '₪', 'ILS', NULL, 0.26930578, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(342, 2, 'Indian Rupee', '₹', 'INR', NULL, 0.01189192, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(343, 2, 'Japanese Yen', '¥', 'JPY', NULL, 0.00651943, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(344, 2, 'South Korean Won', '₩', 'KRW', NULL, 0.00072431, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(345, 2, 'Mexican Peso', '$', 'MXN', NULL, 0.04963579, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(346, 2, 'Malaysian Ringgit', 'RM', 'MYR', NULL, 0.22828362, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(347, 2, 'Norwegian Krone', 'kr', 'NOK', NULL, 0.09107056, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(348, 2, 'New Zealand Dollar', '$', 'NZD', NULL, 0.59742554, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(349, 2, 'Philippine Peso', '₱', 'PHP', NULL, 0.01717068, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(350, 2, 'Pakistani Rupee', '₨', 'PKR', NULL, 0.00359993, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(351, 2, 'Polish Złoty', 'zł', 'PLN', NULL, 0.24896991, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(352, 2, 'Russian Ruble', '₽', 'RUB', NULL, 0.01031737, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(353, 2, 'Swedish Krona', 'kr', 'SEK', NULL, 0.09353429, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(354, 2, 'Singapore Dollar', 'S$', 'SGD', NULL, 0.75482316, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(355, 2, 'Thai Baht', '฿', 'THB', NULL, 0.02958466, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(356, 2, 'Turkish Lira', '₺', 'TRY', NULL, 0.02916503, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(357, 2, 'New Taiwan Dollar', 'NT$', 'TWD', NULL, 0.03126316, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(358, 2, 'South African Rand', 'R', 'ZAR', NULL, 0.05643259, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(359, 2, 'United Arab Emirates Dirham', 'د.إ', 'AED', NULL, 0.27229408, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(360, 2, 'Bulgarian Lev', 'лв', 'BGN', NULL, 0.55290665, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(361, 2, 'Croatian Kuna', 'kn', 'HRK', NULL, 0.14352530, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(362, 2, 'Mauritian Rupee', '₨', 'MUR', NULL, 0.02169169, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(363, 2, 'Romanian Leu', 'lei', 'RON', NULL, 0.21736627, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(364, 2, 'Icelandic Króna', 'kr', 'ISK', NULL, 0.00728181, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(365, 2, 'Nigerian Naira', '₦', 'NGN', NULL, 0.00060848, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(366, 2, 'Colombian Peso', '$', 'COP', NULL, 0.00022816, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(367, 2, 'Argentine Peso', '$', 'ARS', NULL, 0.00101241, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(368, 2, 'Peruvian Sol', 'S/.', 'PEN', NULL, 0.26564190, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(369, 2, 'Vietnamese Dong', '₫', 'VND', NULL, 0.00003954, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(370, 2, 'Ukrainian Hryvnia', '₴', 'UAH', NULL, 0.02421145, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(371, 2, 'Bolivian Boliviano', 'Bs.', 'BOB', NULL, 0.14487286, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(372, 2, 'Albanian Lek', 'L', 'ALL', NULL, 0.01100139, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(373, 2, 'Armenian Dram', '֏', 'AMD', NULL, 0.00259551, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(374, 2, 'Azerbaijani Manat', '₼', 'AZN', NULL, 0.58823994, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(375, 2, 'Bosnia-Herzegovina Convertible Mark', 'KM', 'BAM', NULL, 0.55290665, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(376, 2, 'Bangladeshi Taka', '৳', 'BDT', NULL, 0.00836957, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(377, 2, 'Bahraini Dinar', '.د.ب', 'BHD', NULL, 2.65957447, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(378, 2, 'Bermudan Dollar', '$', 'BMD', NULL, 1.00000000, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(379, 2, 'Belarusian Ruble', 'Br', 'BYN', NULL, 0.30563470, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(380, 2, 'Costa Rican Colón', '₡', 'CRC', NULL, 0.00194987, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(381, 2, 'Cuban Peso', '$', 'CUP', NULL, 0.04170148, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(382, 2, 'Dominican Peso', '$', 'DOP', NULL, 0.01661048, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(383, 2, 'Algerian Dinar', 'د.ج', 'DZD', NULL, 0.00749149, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(384, 2, 'Egyptian Pound', '£', 'EGP', NULL, 0.02051759, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(385, 2, 'Georgian Lari', '₾', 'GEL', NULL, 0.36364587, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54'),
-(386, 2, 'Ghanaian Cedi', '₵', 'GHS', NULL, 0.06142350, 0, 1, 0, 0, 0, '2024-10-30 11:22:54', '2024-10-30 11:22:54');
-
 -- --------------------------------------------------------
 
 --
@@ -313,7 +221,7 @@ CREATE TABLE `currency_data_providers` (
 --
 
 INSERT INTO `currency_data_providers` (`id`, `name`, `alias`, `configuration`, `type`, `status`, `help`, `image`, `is_default`, `instruction`, `created_at`, `updated_at`) VALUES
-(1, 'Coinmarketcap', 'CoinmarketCap', '{\"api_key\":{\"title\":\"API Key\",\"value\":\"bbefd23f-c333-47a8-89e8-a3c7f735d406\"}}', 1, 1, NULL, 'coinmarketcap.jpg', 1, '<ul class=\"list-group list-group-flush\">\n <li class=\"list-group-item\">Go to the CoinMarketCap website <a href=\"https://coinmarketcap.com/api\" target=\"_blank\">https://coinmarketcap.com/api</a></li>\n <li class=\"list-group-item\">Signup this platform or login existing account</li>\n <li class=\"list-group-item\">After logging into your CoinMarketCap account, Choose an API Plan</li>\n <li class=\"list-group-item\">Generate an API Key</li>\n <li class=\"list-group-item\">Copy API key & configure here</li>\n </ul>', NULL, '2024-10-29 17:29:38'),
+(1, 'Coinmarketcap', 'CoinmarketCap', '{\"api_key\":{\"title\":\"API Key\",\"value\":\"---------------\"}}', 1, 1, NULL, 'coinmarketcap.jpg', 1, '<ul class=\"list-group list-group-flush\">\n <li class=\"list-group-item\">Go to the CoinMarketCap website <a href=\"https://coinmarketcap.com/api\" target=\"_blank\">https://coinmarketcap.com/api</a></li>\n <li class=\"list-group-item\">Signup this platform or login existing account</li>\n <li class=\"list-group-item\">After logging into your CoinMarketCap account, Choose an API Plan</li>\n <li class=\"list-group-item\">Generate an API Key</li>\n <li class=\"list-group-item\">Copy API key & configure here</li>\n </ul>', NULL, '2023-08-29 00:33:08'),
 (2, 'Cryptocompare', 'Cryptocompare', '{\"api_key\":{\"title\":\"API Key\",\"value\":\"6ba83d09cbc25dd6bbfeb5cebc615973f95184cb4e9b2e86894a0e7ea2978a53\"}}', 1, 1, NULL, 'cryptocompare.jpg', 0, ' <ul class=\"list-group list-group-flush\">\n                        <li class=\"list-group-item\">Go to the Cryptocompare website <a href=\"https://min-api.cryptocompare.com/\" target=\"_blank\">https://min-api.cryptocompare.com/</a></li>\n                        <li class=\"list-group-item\">Signup this platform or login to the existing account</li>\n                        <li class=\"list-group-item\">After logging into your Cryptocompare account, Choose an API Plan</li>\n                        <li class=\"list-group-item\">Generate an API Key</li>\n                        <li class=\"list-group-item\">Copy API key & configure here</li>\n                    </ul>', NULL, '2023-12-12 09:30:55');
 
 -- --------------------------------------------------------
@@ -389,7 +297,7 @@ CREATE TABLE `extensions` (
 
 INSERT INTO `extensions` (`id`, `act`, `name`, `description`, `image`, `script`, `shortcode`, `support`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'tawk-chat', 'Tawk.to', 'Key location is shown bellow', 'tawky_big.png', '<script>\r\n                        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n                        (function(){\r\n                        var s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\n                        s1.async=true;\r\n                        s1.src=\"https://embed.tawk.to/{{app_key}}\";\r\n                        s1.charset=\"UTF-8\";\r\n                        s1.setAttribute(\"crossorigin\",\"*\");\r\n                        s0.parentNode.insertBefore(s1,s0);\r\n                        })();\r\n                    </script>', '{\"app_key\":{\"title\":\"App Key\",\"value\":\"------\"}}', 'twak.png', 0, '2019-10-18 23:16:05', '2022-03-22 05:22:24'),
-(2, 'google-recaptcha2', 'Google Recaptcha 2', 'Key location is shown bellow', 'recaptcha3.png', '\n<script src=\"https://www.google.com/recaptcha/api.js\"></script>\n<div class=\"g-recaptcha\" data-sitekey=\"{{site_key}}\" data-callback=\"verifyCaptcha\"></div>\n<div id=\"g-recaptcha-error\"></div>', '{\"site_key\":{\"title\":\"Site Key\",\"value\":\"6Ld3WXEqAAAAANtP4xu2BA77ww5-VvfU5l78qvii\"},\"secret_key\":{\"title\":\"Secret Key\",\"value\":\"6Ld3WXEqAAAAAPo6h7Q_rXsL471rPJYeNyhUj7Yr\"}}', 'recaptcha.png', 0, '2019-10-18 23:16:05', '2024-10-31 08:05:46'),
+(2, 'google-recaptcha2', 'Google Recaptcha 2', 'Key location is shown bellow', 'recaptcha3.png', '\n<script src=\"https://www.google.com/recaptcha/api.js\"></script>\n<div class=\"g-recaptcha\" data-sitekey=\"{{site_key}}\" data-callback=\"verifyCaptcha\"></div>\n<div id=\"g-recaptcha-error\"></div>', '{\"site_key\":{\"title\":\"Site Key\",\"value\":\"------------------------\"},\"secret_key\":{\"title\":\"Secret Key\",\"value\":\"------------------------\"}}', 'recaptcha.png', 0, '2019-10-18 23:16:05', '2024-06-01 19:55:06'),
 (3, 'custom-captcha', 'Custom Captcha', 'Just put any random string', 'customcaptcha.png', NULL, '{\"random_key\":{\"title\":\"Random String\",\"value\":\"SecureString\"}}', 'na', 0, '2019-10-18 23:16:05', '2023-08-24 14:53:03'),
 (4, 'google-analytics', 'Google Analytics', 'Key location is shown bellow', 'google_analytics.png', '<script async src=\"https://www.googletagmanager.com/gtag/js?id={{measurement_id}}\"></script>\n                <script>\n                  window.dataLayer = window.dataLayer || [];\n                  function gtag(){dataLayer.push(arguments);}\n                  gtag(\"js\", new Date());\n                \n                  gtag(\"config\", \"{{measurement_id}}\");\n                </script>', '{\"measurement_id\":{\"title\":\"Measurement ID\",\"value\":\"------\"}}', 'ganalytics.png', 0, NULL, '2021-05-04 10:19:12'),
 (5, 'fb-comment', 'Facebook Comment ', 'Key location is shown bellow', 'Facebook.png', '<div id=\"fb-root\"></div><script async defer crossorigin=\"anonymous\" src=\"https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId={{app_key}}&autoLogAppEvents=1\"></script>', '{\"app_key\":{\"title\":\"App Key\",\"value\":\"----\"}}', 'fb_com.PNG', 0, NULL, '2022-03-22 05:18:36');
@@ -427,8 +335,7 @@ CREATE TABLE `forms` (
 --
 
 INSERT INTO `forms` (`id`, `act`, `form_data`, `created_at`, `updated_at`) VALUES
-(7, 'kyc', '{\"full_name\":{\"name\":\"Full Name\",\"label\":\"full_name\",\"is_required\":\"required\",\"extensions\":\"\",\"options\":[],\"type\":\"text\"},\"nid_number\":{\"name\":\"NID Number\",\"label\":\"nid_number\",\"is_required\":\"required\",\"extensions\":null,\"options\":[],\"type\":\"text\"},\"gender\":{\"name\":\"Gender\",\"label\":\"gender\",\"is_required\":\"required\",\"extensions\":null,\"options\":[\"Male\",\"Female\",\"Others\"],\"type\":\"select\"},\"you_hobby\":{\"name\":\"You Hobby\",\"label\":\"you_hobby\",\"is_required\":\"required\",\"extensions\":null,\"options\":[\"Programming\",\"Gardening\",\"Traveling\",\"Others\"],\"type\":\"checkbox\"},\"nid_photo\":{\"name\":\"NID Photo\",\"label\":\"nid_photo\",\"is_required\":\"required\",\"extensions\":\"jpg,png\",\"options\":[],\"type\":\"file\"}}', '2022-03-17 02:56:14', '2023-07-16 11:20:39'),
-(25, 'p2p_payment_method', '{\"data\":{\"name\":\"data\",\"label\":\"data\",\"is_required\":\"required\",\"instruction\":null,\"extensions\":\"\",\"options\":[],\"type\":\"text\",\"width\":\"6\"}}', '2024-10-30 07:35:58', '2024-10-30 07:35:58');
+(7, 'kyc', '{\"full_name\":{\"name\":\"Full Name\",\"label\":\"full_name\",\"is_required\":\"required\",\"extensions\":\"\",\"options\":[],\"type\":\"text\"},\"nid_number\":{\"name\":\"NID Number\",\"label\":\"nid_number\",\"is_required\":\"required\",\"extensions\":null,\"options\":[],\"type\":\"text\"},\"gender\":{\"name\":\"Gender\",\"label\":\"gender\",\"is_required\":\"required\",\"extensions\":null,\"options\":[\"Male\",\"Female\",\"Others\"],\"type\":\"select\"},\"you_hobby\":{\"name\":\"You Hobby\",\"label\":\"you_hobby\",\"is_required\":\"required\",\"extensions\":null,\"options\":[\"Programming\",\"Gardening\",\"Traveling\",\"Others\"],\"type\":\"checkbox\"},\"nid_photo\":{\"name\":\"NID Photo\",\"label\":\"nid_photo\",\"is_required\":\"required\",\"extensions\":\"jpg,png\",\"options\":[],\"type\":\"file\"}}', '2022-03-17 02:56:14', '2023-07-16 11:20:39');
 
 -- --------------------------------------------------------
 
@@ -452,7 +359,7 @@ CREATE TABLE `frontends` (
 --
 
 INSERT INTO `frontends` (`id`, `data_keys`, `data_values`, `seo_content`, `tempname`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'seo.data', '{\"seo_image\":\"1\",\"keywords\":[\"tading\",\"crypto currency\",\"fiat currency\",\"crypto sell\",\"crypto buy\",\"coinofworld\"],\"description\":\"The Cow (Coin of the World) is created using the simplest algorithm: the Arithmetic Mean.\\nWe have listed all the currencies from countries and territories that are currently in circulation worldwide and recognized internationally, according to the ISO 4217 standard.\",\"social_title\":\"Coinofworld - Digital Trading Platform\",\"social_description\":\"Coinofworld- Digital Trading Platform. We have listed all the currencies from countries and territories that are currently in circulation worldwide and recognized internationally, according to the ISO 4217 standard.\",\"image\":\"67233e33163de1730362931.png\"}', NULL, 'basic', '', '2020-07-04 23:42:52', '2024-10-31 07:22:11'),
+(1, 'seo.data', '{\"seo_image\":\"1\",\"keywords\":[\"tading\",\"crypto currency\",\"fiat currency\",\"crypto sell\",\"crypto buy\",\"vinance\"],\"description\":\"VINANCE- Digital Trading Platform. That will take your excitement to the next level! Get ready to experience the ultimate thrill of winning as we bring you a cutting-edge trading experience with Vinance.\",\"social_title\":\"Vinance - Digital Trading Platform\",\"social_description\":\"VINANCE- Digital Trading Platform. That will take your excitement to the next level! Get ready to experience the ultimate thrill of winning as we bring you a cutting-edge trading experience with Vinance.\",\"image\":\"64ed913d053d31693290813.png\"}', NULL, 'basic', NULL, '2020-07-04 23:42:52', '2023-09-06 03:10:48'),
 (24, 'about.content', '{\"has_image\":\"1\",\"heading\":\"Latest News\",\"sub_heading\":\"Register New Account\",\"description\":\"fdg sdfgsdf g ggg\",\"about_icon\":\"<i class=\\\"las la-address-card\\\"><\\/i>\",\"background_image\":\"60951a84abd141620384388.png\",\"about_image\":\"5f9914e907ace1603867881.jpg\"}', NULL, 'basic', NULL, '2020-10-28 00:51:20', '2021-05-07 10:16:28'),
 (25, 'blog.content', '{\"heading\":\"Vinance Latest News\",\"subheading\":\"------\"}', NULL, 'basic', NULL, '2020-10-28 00:51:34', '2023-07-10 07:23:20'),
 (26, 'blog.element', '{\"has_image\":[\"1\"],\"title\":\"Updates on Minimum Order Size for Spot and Margin Trading Pairs\",\"description_nic\":\"<div>\\r\\n\\r\\n<h3>The standard Lorem Ipsum passage, used since the 1500s<\\/h3><p>\\\"Lorem\\r\\n ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \\r\\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim \\r\\nveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea \\r\\ncommodo consequat. Duis aute irure dolor in reprehenderit in voluptate \\r\\nvelit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint \\r\\noccaecat cupidatat non proident, sunt in culpa qui officia deserunt \\r\\nmollit anim id est laborum.\\\"<\\/p><h3>Section 1.10.32 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC<\\/h3><p>\\\"Sed\\r\\n ut perspiciatis unde omnis iste natus error sit voluptatem accusantium \\r\\ndoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo \\r\\ninventore veritatis et quasi architecto beatae vitae dicta sunt \\r\\nexplicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut \\r\\nodit aut fugit, sed quia consequuntur magni dolores eos qui ratione \\r\\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum \\r\\nquia dolor sit amet, consectetur, adipisci velit, sed quia non numquam \\r\\neius modi tempora incidunt ut labore et dolore magnam aliquam quaerat \\r\\nvoluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam \\r\\ncorporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?\\r\\n Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse \\r\\nquam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo \\r\\nvoluptas nulla pariatur?\\\"<\\/p>\\r\\n<h3>1914 translation by H. Rackham<\\/h3>\\r\\n<p>\\\"But I must explain to you how all this mistaken idea of denouncing \\r\\npleasure and praising pain was born and I will give you a complete \\r\\naccount of the system, and expound the actual teachings of the great \\r\\nexplorer of the truth, the master-builder of human happiness. No one \\r\\nrejects, dislikes, or avoids pleasure itself, because it is pleasure, \\r\\nbut because those who do not know how to pursue pleasure rationally \\r\\nencounter consequences that are extremely painful. Nor again is there \\r\\nanyone who loves or pursues or desires to obtain pain of itself, because\\r\\n it is pain, but because occasionally circumstances occur in which toil \\r\\nand pain can procure him some great pleasure. To take a trivial example,\\r\\n which of us ever undertakes laborious physical exercise, except to \\r\\nobtain some advantage from it? But who has any right to find fault with a\\r\\n man who chooses to enjoy a pleasure that has no annoying consequences, \\r\\nor one who avoids a pain that produces no resultant pleasure?\\\"<\\/p>\\r\\n<h3>Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC<\\/h3>\\r\\n<p>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui \\r\\nblanditiis praesentium voluptatum deleniti atque corrupti quos dolores \\r\\net quas molestias excepturi sint occaecati cupiditate non provident, \\r\\nsimilique sunt in culpa qui officia deserunt mollitia animi, id est \\r\\nlaborum et dolorum fuga. Et harum quidem rerum facilis est et expedita \\r\\ndistinctio. Nam libero tempore, cum soluta nobis est eligendi optio \\r\\ncumque nihil impedit quo minus id quod maxime placeat facere possimus, \\r\\nomnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem \\r\\nquibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet\\r\\n ut et voluptates repudiandae sint et molestiae non recusandae. Itaque \\r\\nearum rerum hic tenetur a sapiente delectus, ut aut reiciendis \\r\\nvoluptatibus maiores alias consequatur aut perferendis doloribus \\r\\nasperiores repellat.\\\"<\\/p>\\r\\n<h3>1914 translation by H. Rackham<\\/h3>\\r\\n<p>\\\"On the other hand, we denounce with righteous indignation and \\r\\ndislike men who are so beguiled and demoralized by the charms of \\r\\npleasure of the moment, so blinded by desire, that they cannot foresee \\r\\nthe pain and trouble that are bound to ensue; and equal blame belongs to\\r\\n those who fail in their duty through weakness of will, which is the \\r\\nsame as saying through shrinking from toil and pain. These cases are \\r\\nperfectly simple and easy to distinguish. In a free hour, when our power\\r\\n of choice is untrammelled and when nothing prevents our being able to \\r\\ndo what we like best, every pleasure is to be welcomed and every pain \\r\\navoided. But in certain circumstances and owing to the claims of duty or\\r\\n the obligations of business it will frequently occur that pleasures \\r\\nhave to be repudiated and annoyances accepted. The wise man therefore \\r\\nalways holds in these matters to this principle of selection: he rejects\\r\\n pleasures to secure other greater pleasures, or else he endures pains \\r\\nto avoid worse pains.\\\"<\\/p>\\r\\n<\\/div>\",\"image\":\"64eaedf0ca2941693117936.png\"}', NULL, 'basic', 'updates-on-minimum-order-size-for-spot-and-margin-trading-pairs', '2020-10-28 00:57:19', '2023-08-27 06:32:16'),
@@ -654,7 +561,7 @@ CREATE TABLE `general_settings` (
   `deposit_commission` tinyint(1) NOT NULL DEFAULT 1,
   `trade_commission` tinyint(1) NOT NULL DEFAULT 1,
   `last_cron` text NOT NULL,
-  `available_version` varchar(40) DEFAULT '2.1',
+  `available_version` varchar(40) DEFAULT NULL,
   `allow_decimal_after_number` int(11) NOT NULL DEFAULT 4,
   `metamask_login` tinyint(1) NOT NULL DEFAULT 1,
   `p2p_trade_charge` decimal(5,2) NOT NULL DEFAULT 0.00,
@@ -670,7 +577,7 @@ CREATE TABLE `general_settings` (
 --
 
 INSERT INTO `general_settings` (`id`, `site_name`, `cur_text`, `cur_sym`, `email_from`, `email_from_name`, `email_template`, `sms_template`, `sms_from`, `push_title`, `push_template`, `pusher_config`, `base_color`, `mail_config`, `sms_config`, `firebase_config`, `global_shortcodes`, `kv`, `ev`, `en`, `sv`, `sn`, `pn`, `force_ssl`, `in_app_payment`, `maintenance_mode`, `secure_password`, `agree`, `multi_language`, `registration`, `active_template`, `default_theme`, `system_customized`, `paginate_number`, `currency_format`, `socialite_credentials`, `trading_view_widget`, `deposit_commission`, `trade_commission`, `last_cron`, `available_version`, `allow_decimal_after_number`, `metamask_login`, `p2p_trade_charge`, `other_user_transfer_charge`, `wallet_types`, `cron_error_message`, `created_at`, `updated_at`) VALUES
-(1, 'Coinofworld', 'USD', '$', 'info@coinofworld.com', NULL, '<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n  <!--[if !mso]><!-->\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n  <!--<![endif]-->\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <title></title>\r\n  <style type=\"text/css\">\r\n.ReadMsgBody { width: 100%; background-color: #ffffff; }\r\n.ExternalClass { width: 100%; background-color: #ffffff; }\r\n.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }\r\nhtml { width: 100%; }\r\nbody { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; margin: 0; padding: 0; }\r\ntable { border-spacing: 0; table-layout: fixed; margin: 0 auto;border-collapse: collapse; }\r\ntable table table { table-layout: auto; }\r\n.yshortcuts a { border-bottom: none !important; }\r\nimg:hover { opacity: 0.9 !important; }\r\na { color: #0087ff; text-decoration: none; }\r\n.textbutton a { font-family: \'open sans\', arial, sans-serif !important;}\r\n.btn-link a { color:#FFFFFF !important;}\r\n\r\n@media only screen and (max-width: 480px) {\r\nbody { width: auto !important; }\r\n*[class=\"table-inner\"] { width: 90% !important; text-align: center !important; }\r\n*[class=\"table-full\"] { width: 100% !important; text-align: center !important; }\r\n/* image */\r\nimg[class=\"img1\"] { width: 100% !important; height: auto !important; }\r\n}\r\n</style>\r\n\r\n\r\n\r\n  <table bgcolor=\"#414a51\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n    <tbody><tr>\r\n      <td height=\"50\"></td>\r\n    </tr>\r\n    <tr>\r\n      <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n        <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n          <tbody><tr>\r\n            <td align=\"center\" width=\"600\">\r\n              <!--header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#0087ff\" style=\"border-top-left-radius:6px; border-top-right-radius:6px;text-align:center;vertical-align:top;font-size:0;\" align=\"center\">\r\n                    <table width=\"90%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#FFFFFF; font-size:16px; font-weight: bold;\">This is a System Generated Email</td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n              <!--end header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#FFFFFF\" align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"35\"></td>\r\n                      </tr>\r\n                      <!--logo-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"vertical-align:top;font-size:0;\">\r\n                          <a href=\"#\">\r\n                            <img style=\"display:block; line-height:0px; font-size:0px; border:0px;\" src=\"https://i.imgur.com/Z1qtvtV.png\" alt=\"img\">\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                      <!--end logo-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n                      <!--headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open Sans\', Arial, sans-serif; font-size: 22px;color:#414a51;font-weight: bold;\">Hello {{fullname}} ({{username}})</td>\r\n                      </tr>\r\n                      <!--end headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                          <table width=\"40\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                            <tbody><tr>\r\n                              <td height=\"20\" style=\" border-bottom:3px solid #0087ff;\"></td>\r\n                            </tr>\r\n                          </tbody></table>\r\n                        </td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <!--content-->\r\n                      <tr>\r\n                        <td align=\"left\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#7f8c8d; font-size:16px; line-height: 28px;\">{{message}}</td>\r\n                      </tr>\r\n                      <!--end content-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n              \r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td height=\"45\" align=\"center\" bgcolor=\"#f4f4f4\" style=\"border-bottom-left-radius:6px;border-bottom-right-radius:6px;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                      <!--preference-->\r\n                      <tr>\r\n                        <td class=\"preference-link\" align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#95a5a6; font-size:14px;\">\r\n                          © 2021 <a href=\"#\">{{site_name}}</a>&nbsp;. All Rights Reserved. \r\n                        </td>\r\n                      </tr>\r\n                      <!--end preference-->\r\n                      <tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n        </tbody></table>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td height=\"60\"></td>\r\n    </tr>\r\n  </tbody></table>', 'hi {{fullname}} ({{username}}), {{message}}', 'ViserAdmin', NULL, NULL, '{\"pusher_app_id\":\"-----------------------\",\"pusher_app_key\":\"----------------------\",\"pusher_app_secret\":\"----------------------\",\"pusher_app_cluster\":\"-------------------------\"}', '0066FF', '{\"name\":\"smtp\",\"host\":\"smtp.gmail.com\",\"port\":\"465\",\"enc\":\"ssl\",\"username\":\"huongmya53@gmail.com\",\"password\":\"qzzhupxuultmnwwm\"}', '{\"name\":\"nexmo\",\"clickatell\":{\"api_key\":\"----------------\"},\"infobip\":{\"username\":\"------------8888888\",\"password\":\"-----------------\"},\"message_bird\":{\"api_key\":\"-------------------\"},\"nexmo\":{\"api_key\":\"----------------------\",\"api_secret\":\"----------------------\"},\"sms_broadcast\":{\"username\":\"----------------------\",\"password\":\"-----------------------------\"},\"twilio\":{\"account_sid\":\"-----------------------\",\"auth_token\":\"---------------------------\",\"from\":\"----------------------\"},\"text_magic\":{\"username\":\"-----------------------\",\"apiv2_key\":\"-------------------------------\"},\"custom\":{\"method\":\"get\",\"url\":\"https:\\/\\/hostname\\/demo-api-v1\",\"headers\":{\"name\":[\"api_key\"],\"value\":[\"test_api 555\"]},\"body\":{\"name\":[\"from_number\"],\"value\":[\"5657545757\"]}}}', NULL, '{\n    \"site_name\":\"Name of your site\",\n    \"site_currency\":\"Currency of your site\",\n    \"currency_symbol\":\"Symbol of currency\"\n}', 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 'basic', NULL, 0, 0, 0, '{\"google\":{\"client_id\":\"847182270722-0ahaf2vsnduv2s0a8hhlmr9ra7qtggqn.apps.googleusercontent.com\",\"client_secret\":\"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\",\"status\":1},\"facebook\":{\"client_id\":\"------\",\"client_secret\":\"------\",\"status\":1},\"linkedin\":{\"client_id\":\"-----\",\"client_secret\":\"-----\",\"status\":1}}', '<!-- TradingView Widget BEGIN -->\r\n<div class=\"tradingview-widget-container\">\r\n  <div id=\"tradingview_92622\"></div>\r\n  <div class=\"tradingview-widget-copyright\"><a href=\"https://www.tradingview.com/\" rel=\"noopener nofollow\" target=\"_blank\"><span class=\"blue-text\">Track all markets on TradingView</span></a></div>\r\n  <script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script>\r\n  <script type=\"text/javascript\">\r\n  new TradingView.widget(\r\n  {\r\n  \"width\": \"100%\",\r\n  \"height\": 450,\r\n  \"symbol\": \"{{pairlistingmarket}}:{{pair}}\",\r\n  \"interval\": \"D\",\r\n  \"timezone\": \"Etc/UTC\",\r\n  \"theme\": \"dark\",\r\n  \"style\": \"1\",\r\n  \"locale\": \"en\",\r\n  \"enable_publishing\": false,\r\n  \"allow_symbol_change\": true,\r\n  \"container_id\": \"tradingview_92622\"\r\n}\r\n  );\r\n  </script>\r\n</div>\r\n<!-- TradingView Widget END -->', 1, 1, '2024-10-31 00:24:18', '1.0', 4, 1, 0.00, 0.00, '{\"spot\":{\"name\":\"spot\",\"title\":\"Spot Wallets\",\"type_value\":1,\"description\":\"Users store assets available for immediate trading, configured below for various trading or transaction activities.\",\"configuration\":{\"deposit\":{\"name\":\"deposit\",\"title\":\"Deposit Fund\",\"status\":1,\"description\":\"If you enable this module, users will deposit funds to this type of wallet.\"},\"withdraw\":{\"name\":\"withdraw\",\"title\":\"Withdraw Fund\",\"status\":1,\"description\":\"If you enable this module, users can withdraw their funds from this type of wallet.\"},\"transfer_other_user\":{\"name\":\"transfer_other_user\",\"title\":\"Transfer Fund To Other Users\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other users on the platform.\"},\"transfer_other_wallet\":{\"name\":\"transfer_other_wallet\",\"title\":\"Transfer Fund To Other Wallet\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other wallet on the platform.\"}},\"for_fait\":0,\"for_crypto\":1,\"for_fiat\":1},\"funding\":{\"name\":\"funding\",\"title\":\"Funding Wallets\",\"type_value\":2,\"description\":\" Reserves for deposits and funding activities, configured below for various transaction activities.\",\"configuration\":{\"deposit\":{\"name\":\"deposit\",\"title\":\"Deposit Fund\",\"status\":1,\"description\":\"If you enable this module, users will deposit funds to this type of wallet.\"},\"withdraw\":{\"name\":\"withdraw\",\"title\":\"Withdraw Fund\",\"status\":1,\"description\":\"If you enable this module, users can withdraw their funds from this type of wallet.\"},\"transfer_other_user\":{\"name\":\"transfer_other_user\",\"title\":\"Transfer Fund To Other Users\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other users on the platform.\"},\"transfer_other_wallet\":{\"name\":\"transfer_other_wallet\",\"title\":\"Transfer Fund To Other Wallet\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other wallet on the platform.\"}},\"for_fait\":0,\"for_crypto\":1,\"for_fiat\":1}}', NULL, NULL, '2024-10-31 08:14:56');
+(1, 'Coinofworld', 'USD', '$', 'info@coinofworld.com', NULL, '<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n  <!--[if !mso]><!-->\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n  <!--<![endif]-->\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <title></title>\r\n  <style type=\"text/css\">\r\n.ReadMsgBody { width: 100%; background-color: #ffffff; }\r\n.ExternalClass { width: 100%; background-color: #ffffff; }\r\n.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }\r\nhtml { width: 100%; }\r\nbody { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; margin: 0; padding: 0; }\r\ntable { border-spacing: 0; table-layout: fixed; margin: 0 auto;border-collapse: collapse; }\r\ntable table table { table-layout: auto; }\r\n.yshortcuts a { border-bottom: none !important; }\r\nimg:hover { opacity: 0.9 !important; }\r\na { color: #0087ff; text-decoration: none; }\r\n.textbutton a { font-family: \'open sans\', arial, sans-serif !important;}\r\n.btn-link a { color:#FFFFFF !important;}\r\n\r\n@media only screen and (max-width: 480px) {\r\nbody { width: auto !important; }\r\n*[class=\"table-inner\"] { width: 90% !important; text-align: center !important; }\r\n*[class=\"table-full\"] { width: 100% !important; text-align: center !important; }\r\n/* image */\r\nimg[class=\"img1\"] { width: 100% !important; height: auto !important; }\r\n}\r\n</style>\r\n\r\n\r\n\r\n  <table bgcolor=\"#414a51\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n    <tbody><tr>\r\n      <td height=\"50\"></td>\r\n    </tr>\r\n    <tr>\r\n      <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n        <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n          <tbody><tr>\r\n            <td align=\"center\" width=\"600\">\r\n              <!--header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#0087ff\" style=\"border-top-left-radius:6px; border-top-right-radius:6px;text-align:center;vertical-align:top;font-size:0;\" align=\"center\">\r\n                    <table width=\"90%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#FFFFFF; font-size:16px; font-weight: bold;\">This is a System Generated Email</td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n              <!--end header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#FFFFFF\" align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"35\"></td>\r\n                      </tr>\r\n                      <!--logo-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"vertical-align:top;font-size:0;\">\r\n                          <a href=\"#\">\r\n                            <img style=\"display:block; line-height:0px; font-size:0px; border:0px;\" src=\"https://i.imgur.com/Z1qtvtV.png\" alt=\"img\">\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                      <!--end logo-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n                      <!--headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open Sans\', Arial, sans-serif; font-size: 22px;color:#414a51;font-weight: bold;\">Hello {{fullname}} ({{username}})</td>\r\n                      </tr>\r\n                      <!--end headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                          <table width=\"40\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                            <tbody><tr>\r\n                              <td height=\"20\" style=\" border-bottom:3px solid #0087ff;\"></td>\r\n                            </tr>\r\n                          </tbody></table>\r\n                        </td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <!--content-->\r\n                      <tr>\r\n                        <td align=\"left\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#7f8c8d; font-size:16px; line-height: 28px;\">{{message}}</td>\r\n                      </tr>\r\n                      <!--end content-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n              \r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td height=\"45\" align=\"center\" bgcolor=\"#f4f4f4\" style=\"border-bottom-left-radius:6px;border-bottom-right-radius:6px;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                      <!--preference-->\r\n                      <tr>\r\n                        <td class=\"preference-link\" align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#95a5a6; font-size:14px;\">\r\n                          © 2021 <a href=\"#\">{{site_name}}</a>&nbsp;. All Rights Reserved. \r\n                        </td>\r\n                      </tr>\r\n                      <!--end preference-->\r\n                      <tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n        </tbody></table>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td height=\"60\"></td>\r\n    </tr>\r\n  </tbody></table>', 'hi {{fullname}} ({{username}}), {{message}}', 'ViserAdmin', NULL, NULL, '{\"pusher_app_id\":\"-----------------------\",\"pusher_app_key\":\"----------------------\",\"pusher_app_secret\":\"----------------------\",\"pusher_app_cluster\":\"-------------------------\"}', '0066FF', '{\"name\":\"php\"}', '{\"name\":\"nexmo\",\"clickatell\":{\"api_key\":\"----------------\"},\"infobip\":{\"username\":\"------------8888888\",\"password\":\"-----------------\"},\"message_bird\":{\"api_key\":\"-------------------\"},\"nexmo\":{\"api_key\":\"----------------------\",\"api_secret\":\"----------------------\"},\"sms_broadcast\":{\"username\":\"----------------------\",\"password\":\"-----------------------------\"},\"twilio\":{\"account_sid\":\"-----------------------\",\"auth_token\":\"---------------------------\",\"from\":\"----------------------\"},\"text_magic\":{\"username\":\"-----------------------\",\"apiv2_key\":\"-------------------------------\"},\"custom\":{\"method\":\"get\",\"url\":\"https:\\/\\/hostname\\/demo-api-v1\",\"headers\":{\"name\":[\"api_key\"],\"value\":[\"test_api 555\"]},\"body\":{\"name\":[\"from_number\"],\"value\":[\"5657545757\"]}}}', NULL, '{\n    \"site_name\":\"Name of your site\",\n    \"site_currency\":\"Currency of your site\",\n    \"currency_symbol\":\"Symbol of currency\"\n}', 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 'basic', NULL, 0, 0, 0, '{\"google\":{\"client_id\":\"------------\",\"client_secret\":\"-------------\",\"status\":1},\"facebook\":{\"client_id\":\"------\",\"client_secret\":\"------\",\"status\":1},\"linkedin\":{\"client_id\":\"-----\",\"client_secret\":\"-----\",\"status\":1}}', '<!-- TradingView Widget BEGIN -->\r\n<div class=\"tradingview-widget-container\">\r\n  <div id=\"tradingview_92622\"></div>\r\n  <div class=\"tradingview-widget-copyright\"><a href=\"https://www.tradingview.com/\" rel=\"noopener nofollow\" target=\"_blank\"><span class=\"blue-text\">Track all markets on TradingView</span></a></div>\r\n  <script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script>\r\n  <script type=\"text/javascript\">\r\n  new TradingView.widget(\r\n  {\r\n  \"width\": \"100%\",\r\n  \"height\": 450,\r\n  \"symbol\": \"{{pairlistingmarket}}:{{pair}}\",\r\n  \"interval\": \"D\",\r\n  \"timezone\": \"Etc/UTC\",\r\n  \"theme\": \"dark\",\r\n  \"style\": \"1\",\r\n  \"locale\": \"en\",\r\n  \"enable_publishing\": false,\r\n  \"allow_symbol_change\": true,\r\n  \"container_id\": \"tradingview_92622\"\r\n}\r\n  );\r\n  </script>\r\n</div>\r\n<!-- TradingView Widget END -->', 1, 1, '2023-08-29 12:25:02', NULL, 4, 1, 0.00, 0.00, '{\"spot\":{\"name\":\"spot\",\"title\":\"Spot Wallets\",\"type_value\":1,\"description\":\"Users store assets available for immediate trading, configured below for various trading or transaction activities.\",\"configuration\":{\"deposit\":{\"name\":\"deposit\",\"title\":\"Deposit Fund\",\"status\":1,\"description\":\"If you enable this module, users will deposit funds to this type of wallet.\"},\"withdraw\":{\"name\":\"withdraw\",\"title\":\"Withdraw Fund\",\"status\":1,\"description\":\"If you enable this module, users can withdraw their funds from this type of wallet.\"},\"transfer_other_user\":{\"name\":\"transfer_other_user\",\"title\":\"Transfer Fund To Other Users\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other users on the platform.\"},\"transfer_other_wallet\":{\"name\":\"transfer_other_wallet\",\"title\":\"Transfer Fund To Other Wallet\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other wallet on the platform.\"}},\"for_fait\":0,\"for_crypto\":1,\"for_fiat\":1},\"funding\":{\"name\":\"funding\",\"title\":\"Funding Wallets\",\"type_value\":2,\"description\":\" Reserves for deposits and funding activities, configured below for various transaction activities.\",\"configuration\":{\"deposit\":{\"name\":\"deposit\",\"title\":\"Deposit Fund\",\"status\":1,\"description\":\"If you enable this module, users will deposit funds to this type of wallet.\"},\"withdraw\":{\"name\":\"withdraw\",\"title\":\"Withdraw Fund\",\"status\":1,\"description\":\"If you enable this module, users can withdraw their funds from this type of wallet.\"},\"transfer_other_user\":{\"name\":\"transfer_other_user\",\"title\":\"Transfer Fund To Other Users\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other users on the platform.\"},\"transfer_other_wallet\":{\"name\":\"transfer_other_wallet\",\"title\":\"Transfer Fund To Other Wallet\",\"status\":1,\"description\":\"If you enable this module, users transfer funds from this type of wallet to other wallet on the platform.\"}},\"for_fait\":0,\"for_crypto\":1,\"for_fiat\":1}}', NULL, NULL, '2024-06-01 19:54:37');
 
 -- --------------------------------------------------------
 
@@ -693,8 +600,7 @@ CREATE TABLE `languages` (
 --
 
 INSERT INTO `languages` (`id`, `name`, `code`, `is_default`, `flag`, `created_at`, `updated_at`) VALUES
-(1, 'English', 'en', 0, '64aa848532bab1688896645.png', '2020-07-06 03:47:55', '2024-10-29 18:24:27'),
-(13, 'Viet Nam', 'vi', 1, '67233f969ab181730363286.svg', '2024-10-29 18:17:17', '2024-10-31 07:28:06');
+(1, 'English', 'en', 1, '64aa848532bab1688896645.png', '2020-07-06 03:47:55', '2023-07-09 08:27:25');
 
 -- --------------------------------------------------------
 
@@ -710,13 +616,6 @@ CREATE TABLE `markets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `markets`
---
-
-INSERT INTO `markets` (`id`, `name`, `currency_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'BTC Market', 1, 0, '2024-10-30 07:43:14', '2024-10-30 07:47:24');
 
 -- --------------------------------------------------------
 
@@ -745,42 +644,6 @@ CREATE TABLE `market_data` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `market_data`
---
-
-INSERT INTO `market_data` (`id`, `currency_id`, `symbol`, `pair_id`, `price`, `last_price`, `market_cap`, `last_market_cap`, `percent_change_1h`, `last_percent_change_1h`, `percent_change_24h`, `last_percent_change_24h`, `percent_change_7d`, `last_percent_change_7d`, `volume_24h`, `html_classes`, `created_at`, `updated_at`) VALUES
-(1, 1, 'BTC', 0, 71994.20555801, 72371.06392578, 1423711260829.30000000, 0.00000000, 0.16, 0.17, 1.27, 1.63, 10.07, 9.21, 18.80690000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 17:24:19'),
-(2, 2, 'ETH', 0, 2671.80220755, 2658.98196115, 321701775830.69000000, 0.00000000, 0.18, 0.00, 1.99, 0.00, 3.99, 0.00, 2.76190000, '{\"price_change\":\"up\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(3, 3, 'USDT', 0, 0.99954097, 0.99984066, 120448823473.56000000, 0.00000000, 0.03, 0.00, 0.03, 0.00, 0.04, 0.00, 1.67800000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(4, 4, 'BNB', 0, 601.67570137, 607.48256559, 87803111694.54800000, 0.00000000, 0.35, 0.00, 0.67, 0.00, 3.71, 0.00, 1.47180000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(5, 5, 'SOL', 0, 178.23745253, 181.31430840, 83840034953.12400000, 0.00000000, 0.50, 0.00, 1.51, 0.00, 8.46, 0.00, 16.64830000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(6, 6, 'USDC', 0, 0.99981384, 0.99997119, 34866572835.63200000, 0.00000000, 0.01, 0.00, 0.01, 0.00, 0.01, 0.00, 3.70270000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(7, 7, 'XRP', 0, 0.52263616, 0.52954988, 29691933742.55000000, 0.00000000, 0.36, 0.00, 0.06, 0.00, 0.10, 0.00, 0.28730000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(8, 8, 'DOGE', 0, 0.17098440, 0.17465931, 25062937848.60500000, 0.00000000, 1.19, 0.00, 3.60, 0.00, 24.94, 0.00, 11.22010000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(9, 9, 'TRX', 0, 0.16782468, 0.16571680, 14512109511.07300000, 0.00000000, 0.03, 0.00, 2.32, 0.00, 5.11, 0.00, 43.08100000, '{\"price_change\":\"up\",\"percent_change_1h\":\"up\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(10, 10, 'TON', 0, 5.03935859, 5.11183801, 12819303144.69000000, 0.00000000, 0.12, 0.00, 0.47, 0.00, 2.02, 0.00, 35.54530000, '{\"price_change\":\"down\",\"percent_change_1h\":\"up\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(11, 11, 'ADA', 0, 0.35564582, 0.35311169, 12442942586.43500000, 0.00000000, 0.58, 0.00, 2.82, 0.00, 0.47, 0.00, 4.57760000, '{\"price_change\":\"up\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(12, 12, 'SHIB', 0, 0.00001861, 0.00001916, 10964474055.77000000, 0.00000000, 0.76, 0.00, 1.78, 0.00, 5.39, 0.00, 37.19110000, '{\"price_change\":0,\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(13, 13, 'AVAX', 0, 26.28761490, 26.96779926, 10701235280.30300000, 0.00000000, 1.41, 0.00, 1.14, 0.00, 1.55, 0.00, 11.84250000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(14, 14, 'BCH', 0, 370.76638068, 384.87898206, 7334244482.14630000, 0.00000000, 2.50, 0.00, 2.96, 0.00, 6.16, 0.00, 9.28420000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(15, 15, 'LINK', 0, 11.91339094, 11.59335822, 7467908756.73790000, 0.00000000, 0.65, 0.00, 3.50, 0.00, 4.44, 0.00, 3.52590000, '{\"price_change\":\"up\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(16, 16, 'DOT', 0, 4.17198921, 4.24026466, 6308325301.75210000, 0.00000000, 0.96, 0.00, 1.17, 0.00, 1.16, 0.00, 13.20740000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(17, 17, 'SUI', 0, 2.04349435, 2.03252728, 5647894237.32290000, 0.00000000, 1.51, 0.00, 9.17, 0.00, 9.13, 0.00, 37.34660000, '{\"price_change\":\"up\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(18, 18, 'LEO', 0, 6.05128268, 6.06366370, 5598016114.06220000, 0.00000000, 0.02, 0.00, 0.13, 0.00, 0.04, 0.00, 11.73100000, '{\"price_change\":\"down\",\"percent_change_1h\":\"up\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(19, 19, 'LTC', 0, 72.35991575, 73.56981025, 5437041276.31640000, 0.00000000, 0.26, 0.00, 0.25, 0.00, 5.26, 0.00, 0.81800000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(20, 20, 'NEAR', 0, 4.32922929, 4.45076498, 5269033998.90770000, 0.00000000, 1.23, 0.00, 2.76, 0.00, 5.03, 0.00, 2.63560000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(21, 21, 'DAI', 0, 0.99984750, 1.00010505, 5364564472.43560000, 0.00000000, 0.01, 0.00, 0.03, 0.00, 0.02, 0.00, 0.26800000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(22, 22, 'APT', 0, 9.87506517, 10.00751722, 5115620868.56260000, 0.00000000, 1.00, 0.00, 2.41, 0.00, 2.29, 0.00, 3.59980000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(23, 23, 'UNI', 0, 7.97817946, 7.94337776, 4789319029.22770000, 0.00000000, 0.76, 0.00, 0.73, 0.00, 3.89, 0.00, 3.96010000, '{\"price_change\":\"up\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"up\",\"percent_change_7d\":\"up\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(24, 24, 'PEPE', 0, 0.00000943, 0.00000974, 3967229892.73030000, 0.00000000, 0.99, 0.00, 1.32, 0.00, 3.69, 0.00, 10.62640000, '{\"price_change\":0,\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(25, 25, 'TAO', 0, 518.22645144, 542.75071243, 3824996271.59080000, 0.00000000, 1.28, 0.00, 4.58, 0.00, 2.40, 0.00, 18.30280000, '{\"price_change\":\"down\",\"percent_change_1h\":\"down\",\"percent_change_24h\":\"down\",\"percent_change_7d\":\"down\"}', '2024-10-29 17:30:16', '2024-10-30 08:20:15'),
-(26, 26, 'ICP', 0, 8.11191447, 0.00000000, 0.00000000, 0.00000000, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00000000, NULL, '2024-10-29 17:30:16', '2024-10-29 17:30:16'),
-(27, 27, 'FET', 0, 1.35175713, 0.00000000, 0.00000000, 0.00000000, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00000000, NULL, '2024-10-29 17:30:16', '2024-10-29 17:30:16'),
-(28, 28, 'XMR', 0, 162.94085561, 0.00000000, 0.00000000, 0.00000000, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00000000, NULL, '2024-10-29 17:30:16', '2024-10-29 17:30:16'),
-(29, 29, 'ETC', 0, 19.41454848, 0.00000000, 0.00000000, 0.00000000, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00000000, NULL, '2024-10-29 17:30:16', '2024-10-29 17:30:16'),
-(30, 30, 'XLM', 0, 0.09645542, 0.00000000, 0.00000000, 0.00000000, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00000000, NULL, '2024-10-29 17:30:16', '2024-10-29 17:30:16');
-
 -- --------------------------------------------------------
 
 --
@@ -800,14 +663,6 @@ CREATE TABLE `notification_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `notification_logs`
---
-
-INSERT INTO `notification_logs` (`id`, `user_id`, `sender`, `sent_from`, `sent_to`, `subject`, `message`, `notification_type`, `image`, `created_at`, `updated_at`) VALUES
-(1, 2, 'smtp', 'info@coinofworld.com', 'thoailata1000@gmail.com', 'Password Reset', '<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n  <!--[if !mso]><!-->\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n  <!--<![endif]-->\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <title></title>\r\n  <style type=\"text/css\">\r\n.ReadMsgBody { width: 100%; background-color: #ffffff; }\r\n.ExternalClass { width: 100%; background-color: #ffffff; }\r\n.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }\r\nhtml { width: 100%; }\r\nbody { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; margin: 0; padding: 0; }\r\ntable { border-spacing: 0; table-layout: fixed; margin: 0 auto;border-collapse: collapse; }\r\ntable table table { table-layout: auto; }\r\n.yshortcuts a { border-bottom: none !important; }\r\nimg:hover { opacity: 0.9 !important; }\r\na { color: #0087ff; text-decoration: none; }\r\n.textbutton a { font-family: \'open sans\', arial, sans-serif !important;}\r\n.btn-link a { color:#FFFFFF !important;}\r\n\r\n@media only screen and (max-width: 480px) {\r\nbody { width: auto !important; }\r\n*[class=\"table-inner\"] { width: 90% !important; text-align: center !important; }\r\n*[class=\"table-full\"] { width: 100% !important; text-align: center !important; }\r\n/* image */\r\nimg[class=\"img1\"] { width: 100% !important; height: auto !important; }\r\n}\r\n</style>\r\n\r\n\r\n\r\n  <table bgcolor=\"#414a51\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n    <tbody><tr>\r\n      <td height=\"50\"></td>\r\n    </tr>\r\n    <tr>\r\n      <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n        <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n          <tbody><tr>\r\n            <td align=\"center\" width=\"600\">\r\n              <!--header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#0087ff\" style=\"border-top-left-radius:6px; border-top-right-radius:6px;text-align:center;vertical-align:top;font-size:0;\" align=\"center\">\r\n                    <table width=\"90%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#FFFFFF; font-size:16px; font-weight: bold;\">This is a System Generated Email</td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n              <!--end header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#FFFFFF\" align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"35\"></td>\r\n                      </tr>\r\n                      <!--logo-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"vertical-align:top;font-size:0;\">\r\n                          <a href=\"#\">\r\n                            <img style=\"display:block; line-height:0px; font-size:0px; border:0px;\" src=\"https://i.imgur.com/Z1qtvtV.png\" alt=\"img\">\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                      <!--end logo-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n                      <!--headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open Sans\', Arial, sans-serif; font-size: 22px;color:#414a51;font-weight: bold;\">Hello Xuân Thoạiô Ngô (mikaka)</td>\r\n                      </tr>\r\n                      <!--end headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                          <table width=\"40\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                            <tbody><tr>\r\n                              <td height=\"20\" style=\" border-bottom:3px solid #0087ff;\"></td>\r\n                            </tr>\r\n                          </tbody></table>\r\n                        </td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <!--content-->\r\n                      <tr>\r\n                        <td align=\"left\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#7f8c8d; font-size:16px; line-height: 28px;\"><div style=\"font-family: Montserrat, sans-serif;\">We have received a request to reset the password for your account on&nbsp;<span style=\"font-weight: bolder;\">2024-10-31 03:28:20 PM .<br></span></div><div style=\"font-family: Montserrat, sans-serif;\">Requested From IP:&nbsp;<span style=\"font-weight: bolder;\">113.161.75.179</span>&nbsp;using&nbsp;<span style=\"font-weight: bolder;\">Chrome</span>&nbsp;on&nbsp;<span style=\"font-weight: bolder;\">Windows 10&nbsp;</span>.</div><div style=\"font-family: Montserrat, sans-serif;\"><br></div><br style=\"font-family: Montserrat, sans-serif;\"><div style=\"font-family: Montserrat, sans-serif;\"><div>Your account recovery code is:&nbsp;&nbsp;&nbsp;<font size=\"6\"><span style=\"font-weight: bolder;\">952450</span></font></div><div><br></div></div><div style=\"font-family: Montserrat, sans-serif;\"><br></div><div style=\"font-family: Montserrat, sans-serif;\"><font size=\"4\" color=\"#CC0000\">If you do not wish to reset your password, please disregard this message.&nbsp;</font><br></div><div><font size=\"4\" color=\"#CC0000\"><br></font></div></td>\r\n                      </tr>\r\n                      <!--end content-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n              \r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td height=\"45\" align=\"center\" bgcolor=\"#f4f4f4\" style=\"border-bottom-left-radius:6px;border-bottom-right-radius:6px;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                      <!--preference-->\r\n                      <tr>\r\n                        <td class=\"preference-link\" align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#95a5a6; font-size:14px;\">\r\n                          © 2021 <a href=\"#\">Coinofworld</a>&nbsp;. All Rights Reserved. \r\n                        </td>\r\n                      </tr>\r\n                      <!--end preference-->\r\n                      <tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n        </tbody></table>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td height=\"60\"></td>\r\n    </tr>\r\n  </tbody></table>', 'email', NULL, '2024-10-31 08:28:23', '2024-10-31 08:28:23'),
-(2, 2, 'smtp', 'info@coinofworld.com', 'thoailata1000@gmail.com', 'You have reset your password', '<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n  <!--[if !mso]><!-->\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n  <!--<![endif]-->\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <title></title>\r\n  <style type=\"text/css\">\r\n.ReadMsgBody { width: 100%; background-color: #ffffff; }\r\n.ExternalClass { width: 100%; background-color: #ffffff; }\r\n.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }\r\nhtml { width: 100%; }\r\nbody { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; margin: 0; padding: 0; }\r\ntable { border-spacing: 0; table-layout: fixed; margin: 0 auto;border-collapse: collapse; }\r\ntable table table { table-layout: auto; }\r\n.yshortcuts a { border-bottom: none !important; }\r\nimg:hover { opacity: 0.9 !important; }\r\na { color: #0087ff; text-decoration: none; }\r\n.textbutton a { font-family: \'open sans\', arial, sans-serif !important;}\r\n.btn-link a { color:#FFFFFF !important;}\r\n\r\n@media only screen and (max-width: 480px) {\r\nbody { width: auto !important; }\r\n*[class=\"table-inner\"] { width: 90% !important; text-align: center !important; }\r\n*[class=\"table-full\"] { width: 100% !important; text-align: center !important; }\r\n/* image */\r\nimg[class=\"img1\"] { width: 100% !important; height: auto !important; }\r\n}\r\n</style>\r\n\r\n\r\n\r\n  <table bgcolor=\"#414a51\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n    <tbody><tr>\r\n      <td height=\"50\"></td>\r\n    </tr>\r\n    <tr>\r\n      <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n        <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n          <tbody><tr>\r\n            <td align=\"center\" width=\"600\">\r\n              <!--header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#0087ff\" style=\"border-top-left-radius:6px; border-top-right-radius:6px;text-align:center;vertical-align:top;font-size:0;\" align=\"center\">\r\n                    <table width=\"90%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#FFFFFF; font-size:16px; font-weight: bold;\">This is a System Generated Email</td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n              <!--end header-->\r\n              <table class=\"table-inner\" width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                <tbody><tr>\r\n                  <td bgcolor=\"#FFFFFF\" align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"35\"></td>\r\n                      </tr>\r\n                      <!--logo-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"vertical-align:top;font-size:0;\">\r\n                          <a href=\"#\">\r\n                            <img style=\"display:block; line-height:0px; font-size:0px; border:0px;\" src=\"https://i.imgur.com/Z1qtvtV.png\" alt=\"img\">\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                      <!--end logo-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n                      <!--headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"font-family: \'Open Sans\', Arial, sans-serif; font-size: 22px;color:#414a51;font-weight: bold;\">Hello Xuân Thoạiô Ngô (mikaka)</td>\r\n                      </tr>\r\n                      <!--end headline-->\r\n                      <tr>\r\n                        <td align=\"center\" style=\"text-align:center;vertical-align:top;font-size:0;\">\r\n                          <table width=\"40\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n                            <tbody><tr>\r\n                              <td height=\"20\" style=\" border-bottom:3px solid #0087ff;\"></td>\r\n                            </tr>\r\n                          </tbody></table>\r\n                        </td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td height=\"20\"></td>\r\n                      </tr>\r\n                      <!--content-->\r\n                      <tr>\r\n                        <td align=\"left\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#7f8c8d; font-size:16px; line-height: 28px;\"><p style=\"font-family: Montserrat, sans-serif;\">You have successfully reset your password.</p><p style=\"font-family: Montserrat, sans-serif;\">You changed from&nbsp; IP:&nbsp;<span style=\"font-weight: bolder;\">113.161.75.179</span>&nbsp;using&nbsp;<span style=\"font-weight: bolder;\">Chrome</span>&nbsp;on&nbsp;<span style=\"font-weight: bolder;\">Windows 10&nbsp;</span>&nbsp;on&nbsp;<span style=\"font-weight: bolder;\">2024-10-31 03:29:39 PM</span></p><p style=\"font-family: Montserrat, sans-serif;\"><span style=\"font-weight: bolder;\"><br></span></p><p style=\"font-family: Montserrat, sans-serif;\"><span style=\"font-weight: bolder;\"><font color=\"#ff0000\">If you did not change that, please contact us as soon as possible.</font></span></p></td>\r\n                      </tr>\r\n                      <!--end content-->\r\n                      <tr>\r\n                        <td height=\"40\"></td>\r\n                      </tr>\r\n              \r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td height=\"45\" align=\"center\" bgcolor=\"#f4f4f4\" style=\"border-bottom-left-radius:6px;border-bottom-right-radius:6px;\">\r\n                    <table align=\"center\" width=\"90%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n                      <tbody><tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                      <!--preference-->\r\n                      <tr>\r\n                        <td class=\"preference-link\" align=\"center\" style=\"font-family: \'Open sans\', Arial, sans-serif; color:#95a5a6; font-size:14px;\">\r\n                          © 2021 <a href=\"#\">Coinofworld</a>&nbsp;. All Rights Reserved. \r\n                        </td>\r\n                      </tr>\r\n                      <!--end preference-->\r\n                      <tr>\r\n                        <td height=\"10\"></td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n        </tbody></table>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td height=\"60\"></td>\r\n    </tr>\r\n  </tbody></table>', 'email', NULL, '2024-10-31 08:29:42', '2024-10-31 08:29:42');
 
 -- --------------------------------------------------------
 
@@ -883,7 +738,7 @@ CREATE TABLE `orders` (
   `market_currency_id` tinyint(1) NOT NULL DEFAULT 0,
   `trx` text DEFAULT NULL,
   `order_side` tinyint(1) NOT NULL COMMENT '1=buy,2=sell',
-  `order_type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=Limit Order, 2=Market Order,3=Stop Limit order',
+  `order_type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=Limit Order, 2=Market Order',
   `rate` decimal(28,8) NOT NULL DEFAULT 0.00000000 COMMENT 'user providing rate',
   `price` decimal(28,8) NOT NULL DEFAULT 0.00000000 COMMENT 'coin price',
   `amount` decimal(28,8) NOT NULL DEFAULT 0.00000000 COMMENT 'coin quantity',
@@ -891,9 +746,7 @@ CREATE TABLE `orders` (
   `filled_amount` decimal(28,8) NOT NULL DEFAULT 0.00000000,
   `filed_percentage` decimal(5,2) NOT NULL DEFAULT 0.00,
   `charge` decimal(28,8) NOT NULL DEFAULT 0.00000000,
-  `stop_rate` decimal(28,8) NOT NULL DEFAULT 0.00000000 COMMENT 'stop rate for the stop limit ordder',
-  `is_draft` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=no,1=yes',
-  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=Open,1=Completed,2=pending,9=canceled',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=Open,1=Completed,9=canceled',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -925,15 +778,6 @@ CREATE TABLE `p2p_ads` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `p2p_ads`
---
-
-INSERT INTO `p2p_ads` (`id`, `type`, `user_id`, `asset_id`, `fiat_id`, `payment_window_id`, `price_type`, `price`, `price_margin`, `minimum_amount`, `maximum_amount`, `payment_details`, `terms_of_trade`, `auto_replay_text`, `status`, `complete_step`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 31, 0, 1, 0.00000000, 0.00, 0.00000000, 0.00000000, NULL, NULL, NULL, 1, 1, '2024-10-30 07:24:06', '2024-10-30 07:24:06'),
-(2, 2, 1, 1, 31, 0, 1, 0.00000000, 0.00, 0.00000000, 0.00000000, NULL, NULL, NULL, 1, 1, '2024-10-30 07:26:18', '2024-10-30 07:26:18'),
-(3, 1, 1, 1, 31, 1, 1, 72939.00530000, 100.00, 72938.00530000, 72939.00530000, 'test', 'test', 'test', 1, 3, '2024-10-30 07:27:00', '2024-10-30 07:37:22');
-
 -- --------------------------------------------------------
 
 --
@@ -947,13 +791,6 @@ CREATE TABLE `p2p_ad_payment_methods` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `p2p_ad_payment_methods`
---
-
-INSERT INTO `p2p_ad_payment_methods` (`id`, `ad_id`, `payment_method_id`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, '2024-10-30 07:37:07', '2024-10-30 07:37:07');
 
 -- --------------------------------------------------------
 
@@ -974,13 +811,6 @@ CREATE TABLE `p2p_payment_methods` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `p2p_payment_methods`
---
-
-INSERT INTO `p2p_payment_methods` (`id`, `name`, `slug`, `supported_currency`, `status`, `form_id`, `image`, `branding_color`, `created_at`, `updated_at`) VALUES
-(1, 'momo', 'momo', '[\"USD\"]', 1, 25, NULL, NULL, '2024-10-30 07:35:58', '2024-10-30 07:35:58');
-
 -- --------------------------------------------------------
 
 --
@@ -994,13 +824,6 @@ CREATE TABLE `p2p_payment_windows` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `p2p_payment_windows`
---
-
-INSERT INTO `p2p_payment_windows` (`id`, `minute`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, '2024-10-30 07:36:14', '2024-10-30 07:36:14');
 
 -- --------------------------------------------------------
 
@@ -1100,7 +923,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `name`, `slug`, `tempname`, `secs`, `seo_content`, `is_default`, `created_at`, `updated_at`) VALUES
-(1, 'HOME', '/', 'templates.basic.', '[\"how_to_invest\",\"crypto_currency\",\"product\",\"faq\",\"subscribe\"]', NULL, 1, '2020-07-11 06:23:58', '2023-08-24 04:09:55'),
+(1, 'HOME', '/', 'templates.basic.', '[\"choose_us\",\"how_to_invest\",\"crypto_currency\",\"product\",\"faq\",\"subscribe\"]', NULL, 1, '2020-07-11 06:23:58', '2023-08-24 04:09:55'),
 (5, 'Contact', 'contact', 'templates.basic.', NULL, NULL, 1, '2020-10-22 01:14:53', '2020-10-22 01:14:53'),
 (19, 'Market', 'market', 'templates.basic.', NULL, NULL, 1, '2023-09-05 05:05:34', '2023-09-05 05:05:34'),
 (20, 'Crypto Currency', 'crypto-currency', 'templates.basic.', NULL, NULL, 1, '2023-09-05 05:05:57', '2023-09-05 05:05:57'),
@@ -1118,13 +941,6 @@ CREATE TABLE `password_resets` (
   `token` varchar(40) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `password_resets`
---
-
-INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('thoailata1000@gmail.com', '952450', '2024-10-31 08:28:19');
 
 -- --------------------------------------------------------
 
@@ -1318,18 +1134,9 @@ CREATE TABLE `users` (
   `remember_token` varchar(255) DEFAULT NULL,
   `metamask_wallet_address` text DEFAULT NULL,
   `metamask_nonce` text DEFAULT NULL,
-  `provider_id` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `email`, `dial_code`, `country_code`, `mobile`, `ref_by`, `password`, `country_name`, `city`, `state`, `zip`, `address`, `status`, `kyc_data`, `kyc_rejection_reason`, `kv`, `ev`, `sv`, `profile_complete`, `ver_code`, `ver_code_send_at`, `ts`, `tv`, `tsc`, `ban_reason`, `provider`, `image`, `remember_token`, `metamask_wallet_address`, `metamask_nonce`, `provider_id`, `created_at`, `updated_at`) VALUES
-(1, 'Xuan Thoai', 'Ngo', 'mikata', 'huongmya53@gmail.com', '84', 'VN', '123456789', 0, '$2y$10$Q0bb1syCyuZ5NUco8p3AU.kTzScmnK.HYehQfplYdGcfCp8vn1X1G', 'Vietnam', 'Phú Yên', '237', '700000', '\"ql29, Th\\u1ecd L\\u00e2m, H\\u00f2a Hi\\u1ec7p Nam, \\u0110\\u00f4ng H\\u00f2a, Ph\\u00fa Y\\u00ean\"', 1, NULL, NULL, 1, 1, 1, 1, NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-10-30 07:22:26', '2024-10-30 07:22:44'),
-(2, 'Xuân Thoạiô', 'Ngô', 'mikaka', 'thoailata1000@gmail.com', '84', 'VN', '362731666', 0, '$2y$10$Uh6f.3CV/PyxLzGEe0XOpOP6TKKgiC3mvmS5avfpbtPI2nALABOLK', 'Vietnam', NULL, NULL, NULL, NULL, 1, NULL, NULL, 1, 1, 1, 1, NULL, NULL, 1, 1, 'CA6MDQPVU7YDDK6K', NULL, 'google', NULL, NULL, NULL, NULL, '104015646069635315603', '2024-10-31 08:15:19', '2024-10-31 08:37:55');
 
 -- --------------------------------------------------------
 
@@ -1352,18 +1159,6 @@ CREATE TABLE `user_logins` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `user_logins`
---
-
-INSERT INTO `user_logins` (`id`, `user_id`, `user_ip`, `city`, `country`, `country_code`, `longitude`, `latitude`, `browser`, `os`, `created_at`, `updated_at`) VALUES
-(1, 1, '14.161.44.125', 'Ho Chi Minh City', 'Vietnam', 'VN', '106.6254', '10.8217', 'Chrome', 'Windows 10', '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(2, 1, '14.161.44.125', 'Ho Chi Minh City', 'Vietnam', 'VN', '106.6254', '10.8217', 'Firefox', 'Windows 10', '2024-10-30 07:26:45', '2024-10-30 07:26:45'),
-(3, 2, '113.161.75.179', 'Ho Chi Minh City', 'Vietnam', 'VN', '106.6254', '10.8217', 'Chrome', 'Windows 10', '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(4, 2, '113.161.75.179', 'Ho Chi Minh City', 'Vietnam', 'VN', '106.6254', '10.8217', 'Chrome', 'Windows 10', '2024-10-31 08:29:52', '2024-10-31 08:29:52'),
-(5, 2, '113.161.75.179', 'Ho Chi Minh City', 'Vietnam', 'VN', '106.6254', '10.8217', 'Chrome', 'Windows 10', '2024-10-31 08:35:10', '2024-10-31 08:35:10'),
-(6, 2, '113.161.75.179', 'Ho Chi Minh City', 'Vietnam', 'VN', '106.6254', '10.8217', 'Chrome', 'Windows 10', '2024-10-31 08:37:41', '2024-10-31 08:37:41');
-
 -- --------------------------------------------------------
 
 --
@@ -1379,380 +1174,6 @@ CREATE TABLE `wallets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `wallets`
---
-
-INSERT INTO `wallets` (`id`, `user_id`, `currency_id`, `balance`, `wallet_type`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(2, 1, 1, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(3, 1, 2, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(4, 1, 2, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(5, 1, 3, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(6, 1, 3, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(7, 1, 4, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(8, 1, 4, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(9, 1, 5, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(10, 1, 5, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(11, 1, 6, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(12, 1, 6, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(13, 1, 7, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(14, 1, 7, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(15, 1, 8, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(16, 1, 8, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(17, 1, 9, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(18, 1, 9, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(19, 1, 10, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(20, 1, 10, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(21, 1, 11, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(22, 1, 11, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(23, 1, 12, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(24, 1, 12, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(25, 1, 13, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(26, 1, 13, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(27, 1, 14, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(28, 1, 14, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(29, 1, 15, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(30, 1, 15, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(31, 1, 16, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(32, 1, 16, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(33, 1, 17, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(34, 1, 17, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(35, 1, 18, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(36, 1, 18, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(37, 1, 19, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(38, 1, 19, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(39, 1, 20, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(40, 1, 20, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(41, 1, 21, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(42, 1, 21, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(43, 1, 22, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(44, 1, 22, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(45, 1, 23, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(46, 1, 23, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(47, 1, 24, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(48, 1, 24, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(49, 1, 25, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(50, 1, 25, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(51, 1, 26, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(52, 1, 26, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(53, 1, 27, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(54, 1, 27, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(55, 1, 28, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(56, 1, 28, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(57, 1, 29, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(58, 1, 29, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(59, 1, 30, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(60, 1, 30, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(61, 1, 31, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(62, 1, 31, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(63, 1, 32, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(64, 1, 32, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(65, 1, 33, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(66, 1, 33, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(67, 1, 34, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(68, 1, 34, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(69, 1, 35, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(70, 1, 35, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(71, 1, 36, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(72, 1, 36, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(73, 1, 37, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(74, 1, 37, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(75, 1, 38, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(76, 1, 38, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(77, 1, 39, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(78, 1, 39, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(79, 1, 40, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(80, 1, 40, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(81, 1, 41, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(82, 1, 41, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(83, 1, 42, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(84, 1, 42, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(85, 1, 43, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(86, 1, 43, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(87, 1, 44, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(88, 1, 44, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(89, 1, 45, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(90, 1, 45, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(91, 1, 46, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(92, 1, 46, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(93, 1, 47, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(94, 1, 47, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(95, 1, 48, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(96, 1, 48, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(97, 1, 49, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(98, 1, 49, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(99, 1, 50, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(100, 1, 50, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(101, 1, 51, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(102, 1, 51, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(103, 1, 52, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(104, 1, 52, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(105, 1, 53, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(106, 1, 53, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(107, 1, 54, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(108, 1, 54, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(109, 1, 55, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(110, 1, 55, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(111, 1, 56, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(112, 1, 56, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(113, 1, 57, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(114, 1, 57, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(115, 1, 58, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(116, 1, 58, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(117, 1, 59, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(118, 1, 59, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(119, 1, 60, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(120, 1, 60, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(121, 1, 61, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(122, 1, 61, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(123, 1, 62, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(124, 1, 62, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(125, 1, 63, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(126, 1, 63, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(127, 1, 64, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(128, 1, 64, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(129, 1, 65, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(130, 1, 65, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(131, 1, 66, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(132, 1, 66, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(133, 1, 67, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(134, 1, 67, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(135, 1, 68, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(136, 1, 68, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(137, 1, 69, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(138, 1, 69, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(139, 1, 70, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(140, 1, 70, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(141, 1, 71, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(142, 1, 71, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(143, 1, 72, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(144, 1, 72, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(145, 1, 73, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(146, 1, 73, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(147, 1, 74, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(148, 1, 74, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(149, 1, 75, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(150, 1, 75, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(151, 1, 76, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(152, 1, 76, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(153, 1, 77, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(154, 1, 77, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(155, 1, 78, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(156, 1, 78, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(157, 1, 79, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(158, 1, 79, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(159, 1, 80, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(160, 1, 80, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(161, 1, 81, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(162, 1, 81, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(163, 1, 82, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(164, 1, 82, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(165, 1, 83, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(166, 1, 83, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(167, 1, 84, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(168, 1, 84, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(169, 1, 85, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(170, 1, 85, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(171, 1, 86, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(172, 1, 86, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(173, 1, 87, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(174, 1, 87, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(175, 1, 88, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(176, 1, 88, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(177, 1, 89, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(178, 1, 89, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(179, 1, 90, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(180, 1, 90, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(181, 1, 91, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(182, 1, 91, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(183, 1, 92, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(184, 1, 92, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(185, 1, 93, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(186, 1, 93, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(187, 1, 94, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(188, 1, 94, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(189, 1, 95, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(190, 1, 95, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(191, 1, 96, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(192, 1, 96, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(193, 1, 97, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(194, 1, 97, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(195, 1, 98, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(196, 1, 98, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(197, 1, 99, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(198, 1, 99, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(199, 1, 100, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(200, 1, 100, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(201, 1, 101, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(202, 1, 101, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(203, 1, 102, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(204, 1, 102, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(205, 1, 103, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(206, 1, 103, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(207, 1, 104, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(208, 1, 104, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(209, 1, 105, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(210, 1, 105, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(211, 1, 106, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(212, 1, 106, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(213, 1, 107, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(214, 1, 107, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(215, 1, 108, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(216, 1, 108, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(217, 1, 109, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(218, 1, 109, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(219, 1, 110, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(220, 1, 110, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(221, 1, 111, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(222, 1, 111, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(223, 1, 112, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(224, 1, 112, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(225, 1, 113, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(226, 1, 113, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(227, 1, 114, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(228, 1, 114, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(229, 1, 115, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(230, 1, 115, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(231, 1, 116, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(232, 1, 116, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(233, 1, 117, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(234, 1, 117, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(235, 1, 118, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(236, 1, 118, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(237, 1, 119, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(238, 1, 119, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(239, 1, 120, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(240, 1, 120, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(241, 1, 121, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(242, 1, 121, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(243, 1, 122, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(244, 1, 122, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(245, 1, 123, 0.00000000, 1, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(246, 1, 123, 0.00000000, 2, '2024-10-30 07:22:27', '2024-10-30 07:22:27'),
-(247, 2, 1, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(248, 2, 1, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(249, 2, 31, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(250, 2, 31, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(251, 2, 328, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(252, 2, 328, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(253, 2, 329, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(254, 2, 329, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(255, 2, 330, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(256, 2, 330, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(257, 2, 331, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(258, 2, 331, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(259, 2, 332, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(260, 2, 332, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(261, 2, 333, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(262, 2, 333, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(263, 2, 334, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(264, 2, 334, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(265, 2, 335, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(266, 2, 335, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(267, 2, 336, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(268, 2, 336, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(269, 2, 337, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(270, 2, 337, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(271, 2, 338, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(272, 2, 338, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(273, 2, 339, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(274, 2, 339, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(275, 2, 340, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(276, 2, 340, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(277, 2, 341, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(278, 2, 341, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(279, 2, 342, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(280, 2, 342, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(281, 2, 343, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(282, 2, 343, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(283, 2, 344, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(284, 2, 344, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(285, 2, 345, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(286, 2, 345, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(287, 2, 346, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(288, 2, 346, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(289, 2, 347, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(290, 2, 347, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(291, 2, 348, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(292, 2, 348, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(293, 2, 349, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(294, 2, 349, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(295, 2, 350, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(296, 2, 350, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(297, 2, 351, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(298, 2, 351, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(299, 2, 352, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(300, 2, 352, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(301, 2, 353, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(302, 2, 353, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(303, 2, 354, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(304, 2, 354, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(305, 2, 355, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(306, 2, 355, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(307, 2, 356, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(308, 2, 356, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(309, 2, 357, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(310, 2, 357, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(311, 2, 358, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(312, 2, 358, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(313, 2, 359, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(314, 2, 359, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(315, 2, 360, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(316, 2, 360, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(317, 2, 361, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(318, 2, 361, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(319, 2, 362, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(320, 2, 362, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(321, 2, 363, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(322, 2, 363, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(323, 2, 364, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(324, 2, 364, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(325, 2, 365, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(326, 2, 365, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(327, 2, 366, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(328, 2, 366, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(329, 2, 367, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(330, 2, 367, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(331, 2, 368, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(332, 2, 368, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(333, 2, 369, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(334, 2, 369, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(335, 2, 370, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(336, 2, 370, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(337, 2, 371, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(338, 2, 371, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(339, 2, 372, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(340, 2, 372, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(341, 2, 373, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(342, 2, 373, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(343, 2, 374, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(344, 2, 374, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(345, 2, 375, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(346, 2, 375, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(347, 2, 376, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(348, 2, 376, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(349, 2, 377, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(350, 2, 377, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(351, 2, 378, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(352, 2, 378, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(353, 2, 379, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(354, 2, 379, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(355, 2, 380, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(356, 2, 380, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(357, 2, 381, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(358, 2, 381, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(359, 2, 382, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(360, 2, 382, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(361, 2, 383, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(362, 2, 383, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(363, 2, 384, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(364, 2, 384, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(365, 2, 385, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(366, 2, 385, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(367, 2, 386, 0.00000000, 1, '2024-10-31 08:15:19', '2024-10-31 08:15:19'),
-(368, 2, 386, 0.00000000, 2, '2024-10-31 08:15:19', '2024-10-31 08:15:19');
 
 -- --------------------------------------------------------
 
@@ -2114,13 +1535,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admin_notifications`
 --
 ALTER TABLE `admin_notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admin_password_resets`
 --
 ALTER TABLE `admin_password_resets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `coin_pairs`
@@ -2132,13 +1553,13 @@ ALTER TABLE `coin_pairs`
 -- AUTO_INCREMENT for table `cron_jobs`
 --
 ALTER TABLE `cron_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cron_job_logs`
 --
 ALTER TABLE `cron_job_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cron_schedules`
@@ -2150,7 +1571,7 @@ ALTER TABLE `cron_schedules`
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=387;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `currency_data_providers`
@@ -2186,7 +1607,7 @@ ALTER TABLE `favorite_pairs`
 -- AUTO_INCREMENT for table `forms`
 --
 ALTER TABLE `forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `frontends`
@@ -2216,25 +1637,25 @@ ALTER TABLE `general_settings`
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `markets`
 --
 ALTER TABLE `markets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `market_data`
 --
 ALTER TABLE `market_data`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `notification_logs`
 --
 ALTER TABLE `notification_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `notification_templates`
@@ -2252,25 +1673,25 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `p2p_ads`
 --
 ALTER TABLE `p2p_ads`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `p2p_ad_payment_methods`
 --
 ALTER TABLE `p2p_ad_payment_methods`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `p2p_payment_methods`
 --
 ALTER TABLE `p2p_payment_methods`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `p2p_payment_windows`
 --
 ALTER TABLE `p2p_payment_windows`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `p2p_trades`
@@ -2360,19 +1781,19 @@ ALTER TABLE `update_logs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_logins`
 --
 ALTER TABLE `user_logins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=369;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `withdrawals`
@@ -2390,3 +1811,13 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `general_settings` CHANGE `available_version` `available_version` VARCHAR(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '2.1';
+ALTER TABLE `users` ADD `provider_id` TEXT NULL DEFAULT NULL AFTER `metamask_nonce`;
+UPDATE `general_settings` SET `available_version` = '2.1' WHERE `general_settings`.`id` = 1;
+
+
+ALTER TABLE `orders` ADD `stop_rate` DECIMAL(28,8) NOT NULL DEFAULT '0' COMMENT 'stop rate for the stop limit ordder' AFTER `charge`, ADD `is_draft` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0=no,1=yes' AFTER `stop_rate`;
+ALTER TABLE `orders` CHANGE `order_type` `order_type` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '1=Limit Order, 2=Market Order,3=Stop Limit order';
+ALTER TABLE `orders` CHANGE `status` `status` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0=Open,1=Completed,2=pending,9=canceled';
+INSERT INTO `cron_jobs` (`id`, `name`, `alias`, `action`, `url`, `cron_schedule_id`, `next_run`, `last_run`, `is_running`, `is_default`, `created_at`, `updated_at`) VALUES (NULL, 'Stop Limit Order', 'stop_limit_order', '[\"App\\\\Http\\\\Controllers\\\\CronController\", \"stopLimitOrder\"]', NULL, '2', NULL, NULL, '1', '1', NULL, NULL);
