@@ -24,9 +24,9 @@ use App\Models\Referral;
 
 function systemDetails()
 {
-    $system['name']          = 'vinance';
-    $system['version']       = '2.2';
-    $system['build_version'] = '5.0.5';
+    $system['name']          = 'coinofworld';
+    $system['version']       = '1.0';
+    $system['build_version'] = '1.0.0';
     return $system;
 }
 
